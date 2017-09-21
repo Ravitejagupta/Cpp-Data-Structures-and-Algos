@@ -1,0 +1,134 @@
+/*
+  Find the INDEX of the first and last negative element in
+  the given array of integers and place them into the locations
+  to which the first and last pointer point. If no elements
+  are negative, store -1 in both of the locations.
+*/
+void flneg(int a[], int size, int* first, int* last)
+{
+ for (int i = 0; i< size; i++){
+    if(a[i] <0){
+       *first = i;
+       break;
+    }
+    else {
+       *first =-1;
+       *last =-1;
+    }
+ }
+ for (int i = size-1; i>=0; i--){
+    if(a[i] <0){
+       *last = i;
+       break;
+    }
+ } 
+}
+
+############################################################################################################
+
+/**
+   You are given two pointers into an array, which point TO the first
+   element and PAST the last element. Return a pointer to the 
+   first element that is negative, or a null pointer if there is none.
+
+   Use pointers only, no array syntax
+ */
+ #include<iostream>
+ 
+ using namespace std;
+ 
+int* firstneg(int* begin, int* end)
+{
+   int i =0;
+   while(begin < end){
+      if (*begin < 0){
+         *begin = i;
+         break;
+      }
+      i++;
+      begin++;
+   }
+   if (begin==end) *&begin =0;
+   return begin;
+   
+}
+
+
+####################################################################################################################
+
+/**
+   Add a zero to the beginning and the end of the given array
+   numbers. You are given the number of elements of the array.
+   Allocate a new array and place all numbers into it (that is,
+   the zeroes at the beginning and the end, and all numbers
+   in between). 
+
+   Use the C++ style new operator.
+
+   Return a pointer to the new array.
+*/
+
+int* surround_with_zeroes(int numbers[], int size)
+{
+   int *newarr = new int[2+size];
+   newarr[0]=0;
+   newarr[size+1]=0;
+   for (int i=1;i<=size;i++)
+   {
+      newarr[i]=numbers[i-1];
+   }
+   return newarr;
+}
+
+#######################################################################################################################
+
+#include <cstring>
+#include <iostream>
+
+using namespace std;
+
+/**
+   Given a '\0'-terminated character array, split it by replacing 
+   each space in the character array with a '\0'. Return the number
+   of strings into which you have split the input.
+
+   Use pointers. Don't use array syntax.
+*/
+int split(char* words)
+{  
+   int count=1;
+    while(*words!='\0')
+    {
+    if(*words==' ')
+    {
+       *words='\0';
+       count++;
+    } 
+    words++;
+    }
+    return count;
+}
+
+###################################################################################################################
+
+/*
+  Given a pointer p to the first element in a character array 
+  containing n strings (each terminated by '\0'), return a
+  dynamically allocated array of the starting addresses of all n strings.
+*/
+const char** starts(const char* p, int n)
+{
+   //string *addresses = new string[n];
+   const char **addresses = (const char **)new char *[n];
+   int c = 0;
+   int i =0;
+   addresses[c] = p;
+   while(c != n-1){
+      if (p[i]=='\0'){
+         c++;
+         addresses[c] = (p + i + 1);
+      }
+      i++;
+   }
+   return addresses;
+}

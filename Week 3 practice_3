@@ -1,0 +1,24 @@
+#include <string>
+#include <iostream>
+using namespace std;
+
+/**
+   Return a string that mixes the characters in strings a and b.
+   If one string is longer than the other, append the suffix.
+   For example, mixing "San" and "Francisco" yields "SFarnancisco".
+*/
+
+string splice(string a, string b)
+{  int i = 0;
+   int asize = a.length();
+   int bsize = b.length();
+   string result;
+   while(i < asize && i < bsize){
+      result += a.substr(i,1);
+      result += b.substr(i,1);
+      i++;
+   }
+   if (i == asize) result += b.substr(i);
+   else result += a.substr(i);
+   return result;
+}

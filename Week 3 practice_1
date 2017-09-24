@@ -1,0 +1,64 @@
+/**
+   This program reads in the name of a file from stdin.
+   Then it opens the file and reads all lines of the file.
+   Each line has the form 
+
+   label     value
+
+   The label is a nonempty string without spaces. The value
+   is a floating-point number. 
+
+   Print out the label with the smallest and largest value, 
+   in a left-justified, field of width 50, followed by the value
+   in a right-justified field of width 12, with two digits after
+   the decimal point.
+*/
+
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+   cout << "Input file:" << endl;
+   string input_file;
+   cin >> input_file;
+   ifstream in(input_file);
+   string line,min_label,max_label,label;
+   double max,min;
+   double value;
+   int i = 0;
+   
+   while (in>>label>>value)
+{
+   if (i==0){
+    max_label = label;
+    max = value;
+    min_label = label;
+    min = value;
+   }
+   else{
+      if (value<min){
+         min_label = label;
+         min = value;
+      }
+      if(value>max){
+         max_label = label;
+         max = value;
+      }
+   }
+   i++;
+}
+   cout.width(50);cout<<left<<min_label;
+   cout.width(12);cout<<right<<setprecision(2)<<fixed<<min<<endl;
+   
+   cout.width(50);cout<<left<<max_label;
+   cout.width(12);cout<<right<<setprecision(2)<<fixed<<max<<endl;
+   
+   in.close();
+   
+   return 0;
+}

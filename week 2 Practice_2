@@ -1,0 +1,87 @@
+#include <string>
+
+using namespace std;
+
+/**
+   Returns true if c is a vowel.
+*/
+bool is_vowel(string c)
+{
+   return c == "a" || c == "e" || c == "i" || c == "o" || c == "u"
+      || c == "A" || c == "E" || c == "I" || c == "O" || c == "U";
+}
+
+/**
+   Swaps the first and last vowel in the string s. 
+   For example, if s is "Farewell", it is changed to "Ferewall".
+*/
+void swap_first_last_vowel(string& s)
+{
+   char temp;
+   int f = -1;
+   int index = 0;
+   for (int i=0;i<s.length();i=i+1){
+      string a(1,s[i]);
+      if (is_vowel(a)){
+         if (f == -1){
+            f = i;
+         }
+         index = i;
+      }
+   }
+   if (f!=-1){
+      temp = s[f];
+      s[f] = s[index];
+      s[index] = temp;
+   }
+}
+
+############################################################################################################################
+
+#include <string>
+using namespace std;
+
+
+/**
+   Given a letter grade (A, B, C, D, F) possibly with a suffix (+ or -)
+   produce the numerical value of the grade. An A is a 4, B a 3, 
+   C a 2, D a 1, and F a zero. The suffix + adds 0.3, the suffix
+   - subtracts 0.3. However, an A+ has value 4. Invalid grades have
+   a value of -1. (This includes F+ and F-, as well as any other malformed
+   grades.)
+ */
+double gradeValue(string grade)
+{
+   char g = grade[0];
+   char suffix = grade[1];
+   double value = 0.0;
+   switch (g){
+      case 'A':value = value + 4.0;
+      break;
+      case 'B':value = value + 3.0;
+      break;
+      case 'C':value = value + 2.0;
+      break;
+      case 'D':value = value + 1.0;
+      break;
+      case 'F':value = value + 0.0;
+      break;
+      default:value = value - 1.0;
+      return value;
+   }
+   if (suffix != '\0'){
+   if (suffix == '+'){
+      if (g == 'F') {
+         return -1;
+      }
+      value = value+0.3;
+   }
+   else if (suffix == '-'){
+      if (g == 'F') {
+         return -1;
+      }
+      value = value-0.3;
+   }
+   else return -1;
+   }
+}

@@ -1,0 +1,125 @@
+/*
+   Using the largest function below, implement the middle function 
+   so that it works as described in the comment. 
+
+   You do not write a main function.
+*/
+#include <iostream>
+#include <string>
+
+/**
+   Computes the largest of four values.
+*/
+using namespace std;
+
+int largest(int a, int b, int c, int d)
+{
+   int result = a;
+   if (b > result) result = b;
+   if (c > result) result = c;
+   if (d > result) result = d;
+   return result;
+}
+
+/**
+   Computes the average of the middle values of four given values
+   (that is, without the largest and smallest value).
+   Hint: Use the given largest function. You may also want to define a
+   smallest helper function or take advantage of the fact that 
+   smallest(a, b, c, d) is -largest(-a, -b, -c, -d).
+*/
+double middle(int a, int b, int c, int d)
+{
+   int l = largest(a,b,c,d);
+   int s = -(largest(-a,-b,-c,-d));
+   cout<<l;
+   cout<<s;
+   double avg = 0;
+   if (a!=l && a!=s) avg+=a;
+   if (b!=l && b!=s) avg+=b;
+   if (c!=l && c!=s) avg+=c;
+   if (d!=l && d!=s) avg+=d;
+   
+   return (avg/2);
+}
+
+########################################################################################################################
+
+#include <string>
+
+using namespace std;
+/**
+   Turn a string of the form firstname lastname or 
+   firstname middlename(s) lastname into lastname, firstname 
+   (and middlenames if present). 
+   For example, normalize_name("John Pierpont Flathead") should return
+   "Flathead, John Pierpont". If the string contains no spaces, return
+   it unchanged. Also, if the string already contains a comma, return
+   it unchanged.
+   Hint: If s is a string, then s.length() is the number of characters
+   in the string and s.substr(i, n) is the substring
+   starting at index i of length n. And if s and t are two strings,
+   then s + t is the concatenation of the two strings. You will want
+   to return a string of the form 
+   s.substr(i1, n1) + ", " + s.substr(i2, n2)
+   except if s contains no spaces.
+   To find a space at position i, you can test whether s.substr(i, 1) == " ".
+*/
+string normalize_name(string s)
+{
+   int n = s.length();
+   int count = 0;
+   int index = 0;
+   for (int j = 0; j < s.length(); j++)
+   {
+      if (s.substr(j, 1) == ",") return s;
+      if (s.substr(j, 1) == " "){
+         count +=1;
+         index = j;
+      }
+      
+   }
+   if (count==0) return s;
+   return s.substr(index+1,n) + ", " + s.substr(0,index);
+   
+}
+
+#########################################################################################################################
+
+#include <string>
+
+using namespace std;
+
+/**
+   Returns true if c is a vowel.
+*/
+bool is_vowel(string c)
+{
+   return c == "a" || c == "e" || c == "i" || c == "o" || c == "u"
+      || c == "A" || c == "E" || c == "I" || c == "O" || c == "U";
+}
+
+/**
+   Sets first to the index of the first vowel in the string s
+   and last to the index of the last vowel in s. If s has no vowels,
+   first and last are set to -1.
+*/
+void first_last_vowel_position(string s, int& first, int& last)
+{
+   int index = 0;
+   int f = -1;
+   for (int j = 0; j < s.length();j= j+1) {
+      string a(1,s[j]);
+      if (is_vowel(a)) {
+         if (f == -1){
+            f = j;
+         }
+         index = j;
+         }
+      }
+   first = f;
+   last = index;
+   if (index == 0){
+      first = last = -1;
+   }
+}
